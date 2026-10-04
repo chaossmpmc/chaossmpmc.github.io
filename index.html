@@ -80,7 +80,7 @@
     .num{width:30px;height:30px;flex:0 0 30px;border-radius:10px;display:grid;place-items:center;background:rgba(166,108,255,.18);color:#d8c6ff;font-weight:800}
     .step strong{display:block;margin-bottom:2px}
     .step span{color:var(--muted);font-size:13px}
-    .rules{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
+    .rules{display:block}
     .rule-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:22px;padding:24px}
     .rules-list{display:grid;gap:10px;margin-top:16px}
     .rule{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.045);font-size:14px}
@@ -133,14 +133,29 @@
     .ip{border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
     .quick span,.badge,.eyebrow{border-radius:6px}
     .num{border-radius:5px;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
-    .server-icon{display:none !important}
+    .server-icon{width:76px;height:76px;border-radius:18px;border:1px solid rgba(255,255,255,.1);box-shadow:4px 4px 0 rgba(0,0,0,.28),0 0 34px rgba(166,108,255,.24)}
+
+  
+    /* Full ChaosSMP Minecraft typography theme */
+    body{font-family:"Press Start 2P",monospace}
+    .hero p,.server-card .muted,.section-head p,.card p,.step span,.discord p,.footer,.quick span{
+      font-family:Inter,system-ui,sans-serif;
+    }
+    .brand span,.links,.nav-cta,.eyebrow,.badge,.btn,.quick span,.kicker,
+    .server-card h2,.server-card h3,.section-title,.card h3,.join-card h3,
+    .step strong,.rule,.num,.ip small,.ip strong,.discord h2,.footer .mono{
+      font-family:"Press Start 2P",monospace !important;
+    }
+    .server-icon{display:block !important}
+    .server-top{min-height:76px}
+    .rules .rule-card{border-radius:10px}
 
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-in">
-      <a class="brand" href="#top" aria-label="Chaos SMP home"><span class="pixel-mark">✦</span><span>CHAOS <b>SMP</b></span>
+      <a class="brand" href="#top" aria-label="Chaos SMP home"><img src="server_icon.png" alt="Chaos SMP server icon"><span>CHAOS <b>SMP</b></span>
       </a>
       <div class="links">
         <a href="#features">Features</a>
@@ -170,8 +185,7 @@
           </div>
         </div>
         <div class="server-card">
-          <div class="server-top"><span class="badge">● READY TO PLAY</span>
-          </div>
+          <div class="server-top"><img class="server-icon" src="server_icon.png" alt="Chaos SMP server icon"><span class="badge">● READY TO PLAY</span></div>
           <h2>Chaos SMP</h2>
           <div class="muted">Survive. Fight. Cause Chaos.</div>
           <div class="ip">
@@ -258,14 +272,6 @@
               <div class="rule"><b>05</b>No exploits or intentional abuse of bugs.</div>
               <div class="rule"><b>06</b>Staff decisions are final.</div>
             </div>
-          </div>
-          <div class="rule-card">
-            <h3 style="margin-top:0">In game, type</h3>
-            <div class="ip" style="margin-top:14px">
-              <small>Rules</small>
-              <strong>/rule</strong>
-            </div>
-            <p style="color:var(--muted);font-size:13px;margin-top:14px">Keep the server fun for everyone. When in doubt, ask staff before you act.</p>
           </div>
         </div>
       </div>
