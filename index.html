@@ -100,14 +100,47 @@
       .cards,.join-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:10px}
       section{padding:56px 0}.server-card{padding:20px}
     }
+  
+    /* Minecraft-inspired ChaosSMP skin */
+    body{
+      background:
+        linear-gradient(rgba(9,7,14,.86),rgba(9,7,14,.96)),
+        repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 2px,transparent 2px 8px),
+        repeating-linear-gradient(90deg,rgba(255,116,23,.018) 0 2px,transparent 2px 8px),
+        radial-gradient(circle at 20% 0%,rgba(255,106,61,.18),transparent 26%),
+        radial-gradient(circle at 80% 6%,rgba(166,108,255,.2),transparent 28%),
+        #0b0712;
+      image-rendering:pixelated;
+    }
+    h1,h2,h3,.nav-cta,.btn,.brand span:last-child,.kicker{
+      font-family:"Press Start 2P",monospace !important;
+      letter-spacing:.01em;
+    }
+    h2.section-title{font-size:clamp(20px,3.4vw,34px);line-height:1.35}
+    .brand{gap:9px}
+    .pixel-mark{
+      width:30px;height:30px;display:grid;place-items:center;
+      font-family:"Press Start 2P",monospace;font-size:14px;
+      color:#fff;background:linear-gradient(135deg,var(--orange),var(--purple));
+      border:2px solid rgba(255,255,255,.18);
+      box-shadow:3px 3px 0 rgba(0,0,0,.35),0 0 20px rgba(166,108,255,.22);
+    }
+    .server-card,.card,.join-card,.rule-card,.discord{
+      border-radius:10px;
+      box-shadow:4px 4px 0 rgba(0,0,0,.28);
+    }
+    .btn,.nav-cta{border-radius:6px;box-shadow:3px 3px 0 rgba(0,0,0,.28)}
+    .ip{border-radius:8px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.025)}
+    .quick span,.badge,.eyebrow{border-radius:6px}
+    .num{border-radius:5px;box-shadow:2px 2px 0 rgba(0,0,0,.25)}
+    .server-icon{display:none !important}
+
   </style>
 </head>
 <body>
   <nav class="nav">
     <div class="container nav-in">
-      <a class="brand" href="#top" aria-label="Chaos SMP home">
-        <img src="server_icon.png" alt="Chaos SMP">
-        <span>CHAOS <b>SMP</b></span>
+      <a class="brand" href="#top" aria-label="Chaos SMP home"><span class="pixel-mark">✦</span><span>CHAOS <b>SMP</b></span>
       </a>
       <div class="links">
         <a href="#features">Features</a>
@@ -137,9 +170,7 @@
           </div>
         </div>
         <div class="server-card">
-          <div class="server-top">
-            <img class="server-icon" src="server_icon.png" alt="Chaos SMP server icon">
-            <span class="badge">● READY TO PLAY</span>
+          <div class="server-top"><span class="badge">● READY TO PLAY</span>
           </div>
           <h2>Chaos SMP</h2>
           <div class="muted">Survive. Fight. Cause Chaos.</div>
