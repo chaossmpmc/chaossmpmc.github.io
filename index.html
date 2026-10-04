@@ -1,277 +1,48 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#120b1f">
-  <meta name="description" content="Chaos SMP — the Minecraft survival server where nothing is under control. Java and Bedrock supported.">
-  <title>Chaos SMP — Survive. Fight. Cause Chaos.</title>
-  <link rel="icon" href="server_icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0712;--panel:#140d20;--panel2:#1b1229;--line:rgba(255,255,255,.08);
-      --text:#f7f4fb;--muted:#afa4bd;--orange:#ff6a3d;--purple:#a66cff;--cyan:#26d9ff;
-      --green:#70f0a6;--shadow:0 18px 60px rgba(0,0,0,.35);--radius:24px;
-    }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{margin:0;background:
-      radial-gradient(circle at 15% 10%,rgba(255,106,61,.16),transparent 28%),
-      radial-gradient(circle at 85% 18%,rgba(166,108,255,.18),transparent 30%),
-      radial-gradient(circle at 50% 100%,rgba(38,217,255,.10),transparent 35%),
-      var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.6}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:44px 44px}
-    a{text-decoration:none;color:inherit}
-    .container{width:min(1160px,calc(100% - 36px));margin:auto}
-    .mono{font-family:"Press Start 2P",monospace}
-    .nav{position:sticky;top:0;z-index:50;background:rgba(11,7,18,.78);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-    .nav-in{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.4px}
-    .brand img{width:38px;height:38px;border-radius:12px;box-shadow:0 0 28px rgba(166,108,255,.32)}
-    .brand span{font-size:14px}
-    .brand b{color:var(--orange)}
-    .links{display:flex;gap:22px;color:#d9d3e0;font-size:14px}
-    .links a{opacity:.8;transition:.2s}
-    .links a:hover{opacity:1;color:#fff}
-    .nav-cta{padding:10px 14px;border:1px solid rgba(166,108,255,.5);background:linear-gradient(135deg,rgba(166,108,255,.16),rgba(255,106,61,.12));border-radius:12px;font-weight:700;font-size:13px}
-    .hero{padding:94px 0 72px}
-    .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:58px;align-items:center}
-    .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.03);color:#d8d0e2;font-size:12px}
-    .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 12px rgba(112,240,166,.7)}
-    h1{font-size:clamp(42px,8vw,84px);line-height:.98;letter-spacing:-3px;margin:20px 0 16px}
-    h1 span:first-child{color:var(--orange)}
-    h1 span:last-child{color:var(--purple)}
-    .hero p{font-size:18px;color:var(--muted);max-width:680px}
-    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0 22px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 18px;border-radius:14px;font-weight:800;font-size:14px;border:1px solid var(--line);cursor:pointer}
-    .btn-primary{background:linear-gradient(135deg,var(--orange),#ff845d);color:#150c10;box-shadow:0 10px 32px rgba(255,106,61,.24)}
-    .btn-secondary{background:rgba(255,255,255,.04)}
-    .quick{display:flex;flex-wrap:wrap;gap:10px;color:#d1c8d8;font-size:12px}
-    .quick span{padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.025)}
-    .server-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow);position:relative;overflow:hidden}
-    .server-card:after{content:"";position:absolute;width:220px;height:220px;right:-80px;top:-90px;background:radial-gradient(circle,rgba(166,108,255,.32),transparent 68%);pointer-events:none}
-    .server-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
-    .server-icon{width:76px;height:76px;border-radius:22px;border:1px solid rgba(255,255,255,.1);box-shadow:0 0 42px rgba(166,108,255,.24)}
-    .badge{font-size:12px;padding:8px 10px;border-radius:10px;background:rgba(112,240,166,.12);border:1px solid rgba(112,240,166,.26);color:var(--green)}
-    .server-card h2{margin:0 0 6px;font-size:24px}
-    .server-card .muted{color:var(--muted);font-size:13px}
-    .ip{margin-top:18px;padding:14px;border-radius:15px;background:#0f0918;border:1px solid var(--line);font-family:ui-monospace,SFMono-Regular,monospace;font-size:13px}
-    .ip small{display:block;color:#83788f;font-family:Inter,sans-serif;text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
-    .ip strong{color:#f7f4fb;word-break:break-all}
-    .ip button{float:right;background:transparent;color:#bfaee0;border:0;cursor:pointer;font-size:16px}
-    section{padding:78px 0}
-    .section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:26px}
-    .kicker{color:var(--cyan);text-transform:uppercase;letter-spacing:2px;font-size:11px;font-weight:800}
-    h2.section-title{font-size:clamp(26px,5vw,42px);margin:8px 0 0;letter-spacing:-1.5px}
-    .section-head p{max-width:600px;color:var(--muted);margin:0}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-    .card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:20px;padding:22px}
-    .card .icon{font-size:24px;margin-bottom:10px}
-    .card h3{margin:0 0 7px;font-size:17px}
-    .card p{margin:0;color:var(--muted);font-size:14px}
-    .join-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-    .join-card{background:linear-gradient(145deg,rgba(255,106,61,.08),rgba(166,108,255,.08));border:1px solid var(--line);border-radius:22px;padding:24px}
-    .join-card h3{margin:0 0 10px;font-size:20px}
-    .steps{display:grid;gap:12px}
-    .step{display:flex;gap:14px;align-items:flex-start}
-    .num{width:30px;height:30px;flex:0 0 30px;border-radius:10px;display:grid;place-items:center;background:rgba(166,108,255,.18);color:#d8c6ff;font-weight:800}
-    .step strong{display:block;margin-bottom:2px}
-    .step span{color:var(--muted);font-size:13px}
-    .rules{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
-    .rule-card{background:rgba(255,255,255,.035);border:1px solid var(--line);border-radius:22px;padding:24px}
-    .rules-list{display:grid;gap:10px;margin-top:16px}
-    .rule{padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.045);font-size:14px}
-    .rule b{color:#ffd2bf;margin-right:6px}
-    .discord{background:linear-gradient(135deg,rgba(166,108,255,.17),rgba(255,106,61,.10));border:1px solid rgba(166,108,255,.28);border-radius:28px;padding:34px;display:flex;justify-content:space-between;gap:20px;align-items:center}
-    .discord p{margin:7px 0 0;color:var(--muted);max-width:650px}
-    .footer{padding:34px 0 48px;color:#8f839c;font-size:12px}
-    .footer-in{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px}
-    .toast{position:fixed;right:18px;bottom:18px;transform:translateY(20px);opacity:0;pointer-events:none;padding:11px 14px;border-radius:12px;background:#efe9f8;color:#120b1f;font-weight:800;font-size:12px;transition:.25s;box-shadow:var(--shadow);z-index:100}
-    .toast.show{opacity:1;transform:translateY(0)}
-    @media(max-width:900px){
-      .links{display:none}.hero{padding-top:60px}.hero-grid,.rules{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.discord{display:block}
-    }
-    @media(max-width:620px){
-      .container{width:min(100% - 24px,1160px)}.nav-in{height:66px}.nav-cta{display:none}
-      .hero{padding:44px 0 40px}.hero p{font-size:16px}h1{font-size:52px;letter-spacing:-2px}
-      .cards,.join-grid{grid-template-columns:1fr}.section-head{display:block}.section-head p{margin-top:10px}
-      section{padding:56px 0}.server-card{padding:20px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChaosSMP — Survive. Fight. Cause Chaos.</title>
+<meta name="description" content="ChaosSMP — Minecraft survival, PvP, events, custom crates and Chaos Shards.">
+<meta name="theme-color" content="#0b0711">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#09060d;--card:#17101f;--line:rgba(255,255,255,.09);--text:#f7f4fb;--muted:#aa9db8;--o:#ff7417;--p:#ad58ff;--c:#47d9ff;--g:#65ee9a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 15% 0%,rgba(255,116,23,.16),transparent 28%),radial-gradient(circle at 90% 8%,rgba(173,88,255,.18),transparent 30%),linear-gradient(180deg,#09060d,#100818 45%,#09060d);color:var(--text);font-family:Inter,system-ui,sans-serif;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,black,transparent 75%);opacity:.6}.wrap{width:min(1120px,calc(100% - 32px));margin:auto}.px{font-family:"Press Start 2P",monospace}.nav{position:sticky;top:0;z-index:20;background:rgba(8,5,12,.78);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.navin{height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.mark{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:linear-gradient(135deg,var(--o),var(--p));box-shadow:0 0 28px rgba(173,88,255,.2)}.links{display:flex;gap:22px;color:var(--muted);font-size:14px;font-weight:700}.links a:hover{color:#fff}.topbtn{padding:10px 15px;border-radius:12px;background:linear-gradient(135deg,var(--o),var(--p));font-weight:800;font-size:13px}.hero{padding:82px 0 52px}.heroGrid{display:grid;grid-template-columns:1.08fr .92fr;gap:28px;align-items:center}.eyebrow{display:inline-block;padding:8px 11px;border-radius:999px;border:1px solid rgba(173,88,255,.25);background:rgba(173,88,255,.08);color:#dcc9ef;font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.hero h1{font-size:clamp(44px,7vw,80px);line-height:.98;letter-spacing:-.06em;margin:18px 0}.hero h1 .o{color:var(--o)}.hero h1 .p{color:var(--p)}.lead{max-width:660px;color:#c8bdcf;font-size:18px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}.btn{border:1px solid var(--line);padding:13px 18px;border-radius:14px;font-weight:800;background:rgba(255,255,255,.03);cursor:pointer;color:#fff}.btn.primary{border:0;background:linear-gradient(135deg,var(--o),var(--p));box-shadow:0 12px 34px rgba(173,88,255,.18)}.server{padding:24px;border:1px solid rgba(255,255,255,.1);border-radius:26px;background:rgba(17,11,24,.86);box-shadow:0 24px 70px rgba(0,0,0,.38)}.serverTop{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}.server h3{margin:0;font-size:21px}.online{font-size:10px;font-weight:900;color:#b9ffd4;background:rgba(101,238,154,.08);border:1px solid rgba(101,238,154,.18);padding:7px 10px;border-radius:999px}.ip{padding:16px;border-radius:15px;border:1px dashed rgba(255,255,255,.15);background:#0d0913;cursor:pointer}.ip small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.14em}.ip strong{display:block;color:var(--c);font-family:"Press Start 2P";font-size:13px;line-height:1.5;margin-top:7px;word-break:break-all}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.stat{padding:14px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.025)}.stat span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.12em}.stat b{display:block;font-size:13px;margin-top:3px}section{padding:68px 0}.head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}.kicker{color:#ffb05c;font-size:10px;font-weight:900;letter-spacing:.18em;text-transform:uppercase}.head h2{font-size:clamp(28px,4vw,42px);margin:7px 0 0;letter-spacing:-.04em}.head p{max-width:520px;color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{padding:21px;border:1px solid var(--line);border-radius:20px;background:rgba(23,16,31,.72)}.icon{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.045);border:1px solid var(--line);font-size:19px;margin-bottom:14px}.card h3{margin:0 0 7px;font-size:17px}.card p{margin:0;color:var(--muted);font-size:13px}.economy{display:grid;grid-template-columns:.78fr 1.22fr;gap:16px}.shard{background:linear-gradient(135deg,rgba(173,88,255,.14),rgba(71,217,255,.05))}.shard .big{font-size:46px;margin:8px 0}.tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.tier{padding:13px;border:1px solid var(--line);border-radius:13px;display:flex;justify-content:space-between;gap:10px}.tier span{color:var(--muted)}.tier strong{color:#f6e6ff}.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px}.rule{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}.rule:last-child{border-bottom:0}.num{flex:0 0 27px;width:27px;height:27px;border-radius:8px;background:linear-gradient(135deg,var(--o),var(--p));display:grid;place-items:center;font-size:11px;font-weight:900}.rule p{margin:0;color:#d7cfdf;font-size:13px}.disc{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:28px;border-radius:24px;border:1px solid rgba(173,88,255,.22);background:radial-gradient(circle at 100% 0%,rgba(173,88,255,.2),transparent 35%),#140d1c}.disc p{margin:6px 0 0;color:var(--muted)}footer{border-top:1px solid var(--line);padding:26px 0 36px;color:var(--muted);font-size:12px}.frow{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,16px);opacity:0;pointer-events:none;padding:9px 13px;border-radius:999px;background:#1e122b;border:1px solid rgba(255,255,255,.14);font-size:12px;font-weight:800;transition:.2s;z-index:50}.toast.show{opacity:1;transform:translate(-50%,0)}@media(max-width:850px){.links{display:none}.heroGrid,.economy,.rules{grid-template-columns:1fr}.grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.grid,.tiers{grid-template-columns:1fr}.navin{height:64px}.hero{padding-top:60px}.btn{width:100%}.actions{display:grid}.head{display:block}.head p{margin-top:10px}.disc{flex-direction:column;align-items:flex-start}}
+</style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="container nav-in">
-      <a class="brand" href="#top" aria-label="Chaos SMP home">
-        <img src="server_icon.png" alt="Chaos SMP">
-        <span>CHAOS <b>SMP</b></span>
-      </a>
-      <div class="links">
-        <a href="#features">Features</a>
-        <a href="#join">How to Join</a>
-        <a href="#rules">Rules</a>
-        <a href="#discord">Discord</a>
-      </div>
-      <a class="nav-cta" href="https://discord.com/invite/rCVdCtJ72" target="_blank" rel="noopener">JOIN DISCORD →</a>
-    </div>
-  </nav>
-
-  <main id="top">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow"><span class="dot"></span> Minecraft Survival • Java + Bedrock</div>
-          <h1 class="mono"><span>CHAOS</span><br><span>SMP</span></h1>
-          <p>The survival server where nothing is under control. Build empires, forge alliances, betray your friends and survive the chaos with a community that never sleeps.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#join">How to Join</a>
-            <a class="btn btn-secondary" href="https://discord.com/invite/rCVdCtJ72" target="_blank" rel="noopener">Join Discord</a>
-          </div>
-          <div class="quick">
-            <span>⚔ Merciless PvP</span>
-            <span>💥 Chaos Events</span>
-            <span>🏰 Build Your Empire</span>
-          </div>
-        </div>
-        <div class="server-card">
-          <div class="server-top">
-            <img class="server-icon" src="server_icon.png" alt="Chaos SMP server icon">
-            <span class="badge">● READY TO PLAY</span>
-          </div>
-          <h2>Chaos SMP</h2>
-          <div class="muted">Survive. Fight. Cause Chaos.</div>
-          <div class="ip">
-            <button onclick="copyIP('chaossmp.onplugged.host','Java IP copied!')" aria-label="Copy Java IP">⧉</button>
-            <small>Java Edition</small>
-            <strong>chaossmp.onplugged.host</strong>
-          </div>
-          <div class="ip">
-            <button onclick="copyIP('chaossmp.onplugged.host:39770','Bedrock IP copied!')" aria-label="Copy Bedrock IP">⧉</button>
-            <small>Bedrock Edition</small>
-            <strong>chaossmp.onplugged.host:39770</strong>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="features">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Why Chaos?</div>
-            <h2 class="section-title">Classic survival.<br>Not-so-classic rules.</h2>
-          </div>
-          <p>Chaos SMP is built around dangerous choices, player-driven stories and a community where every decision can change what happens next.</p>
-        </div>
-        <div class="cards">
-          <article class="card"><div class="icon">⚔️</div><h3>Merciless PvP</h3><p>Fight for territory, loot and reputation. Trust is valuable — and fragile.</p></article>
-          <article class="card"><div class="icon">💥</div><h3>Chaos Events</h3><p>Server events keep the world moving and give everyone something to fight for.</p></article>
-          <article class="card"><div class="icon">🏰</div><h3>Build Your Empire</h3><p>Create a base, gather allies and turn your corner of the world into a kingdom.</p></article>
-          <article class="card"><div class="icon">🔥</div><h3>Player-Driven Stories</h3><p>Make alliances, betray rivals and create the stories people remember.</p></article>
-          <article class="card"><div class="icon">🌐</div><h3>Java + Bedrock</h3><p>Join from Java Edition or Bedrock Edition with the addresses above.</p></article>
-          <article class="card"><div class="icon">💬</div><h3>Active Community</h3><p>Announcements, recruiting, support and giveaways happen on Discord first.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section id="join">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Start Playing</div>
-            <h2 class="section-title">Join the chaos in seconds.</h2>
-          </div>
-          <p>Pick your edition, add the server and jump straight into the world.</p>
-        </div>
-        <div class="join-grid">
-          <div class="join-card">
-            <h3>Java Edition</h3>
-            <div class="steps">
-              <div class="step"><div class="num">1</div><div><strong>Open Multiplayer</strong><span>Choose “Add Server” in Minecraft Java Edition.</span></div></div>
-              <div class="step"><div class="num">2</div><div><strong>Enter the IP</strong><span>chaossmp.onplugged.host</span></div></div>
-              <div class="step"><div class="num">3</div><div><strong>Connect</strong><span>Save the server and hit Join Server.</span></div></div>
-            </div>
-          </div>
-          <div class="join-card">
-            <h3>Bedrock Edition</h3>
-            <div class="steps">
-              <div class="step"><div class="num">1</div><div><strong>Open Servers</strong><span>Go to the multiplayer/server list.</span></div></div>
-              <div class="step"><div class="num">2</div><div><strong>Add the server</strong><span>Address: chaossmp.onplugged.host · Port: 39770</span></div></div>
-              <div class="step"><div class="num">3</div><div><strong>Join</strong><span>Connect and start your survival run.</span></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="rules">
-      <div class="container">
-        <div class="section-head">
-          <div>
-            <div class="kicker">Know the limits</div>
-            <h2 class="section-title">Even chaos has rules.</h2>
-          </div>
-          <p>Play hard, keep it fair and respect the server.</p>
-        </div>
-        <div class="rules">
-          <div class="rule-card">
-            <div class="mono" style="font-size:13px;color:var(--orange)">CHAOS SMP RULES</div>
-            <div class="rules-list">
-              <div class="rule"><b>01</b>No hacks or modified clients.</div>
-              <div class="rule"><b>02</b>Respect players and keep chat civil.</div>
-              <div class="rule"><b>03</b>Griefing is allowed outside protected claims.</div>
-              <div class="rule"><b>04</b>No lag machines.</div>
-              <div class="rule"><b>05</b>No exploits or intentional abuse of bugs.</div>
-              <div class="rule"><b>06</b>Staff decisions are final.</div>
-            </div>
-          </div>
-          <div class="rule-card">
-            <h3 style="margin-top:0">In game, type</h3>
-            <div class="ip" style="margin-top:14px">
-              <small>Rules</small>
-              <strong>/rule</strong>
-            </div>
-            <p style="color:var(--muted);font-size:13px;margin-top:14px">Keep the server fun for everyone. When in doubt, ask staff before you act.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="discord">
-      <div class="container">
-        <div class="discord">
-          <div>
-            <div class="kicker">Community Hub</div>
-            <h2 class="section-title" style="margin-top:8px">Join the Chaos on Discord.</h2>
-            <p>Event announcements, clan recruiting, support and giveaways. Everything happens there first.</p>
-          </div>
-          <a class="btn btn-primary" href="https://discord.com/invite/rCVdCtJ72" target="_blank" rel="noopener">Join our Discord →</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-in">
-      <div class="mono">CHAOS SMP</div>
-      <div>chaossmp.onplugged.host</div>
-      <div>Not affiliated with Mojang Studios or Microsoft.</div>
-    </div>
-  </footer>
-
-  <div class="toast" id="toast">Copied!</div>
-
-  <script>
-    function copyIP(value, message){
-      navigator.clipboard?.writeText(value).catch(()=>{});
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(()=>toast.classList.remove('show'), 1600);
-    }
-  </script>
-</body>
-</html>
+<nav class="nav"><div class="wrap navin"><a class="brand" href="#"><span class="mark">✦</span><span class="px">CHAOS SMP</span></a><div class="links"><a href="#features">Server</a><a href="#economy">Economy</a><a href="#rules">Rules</a><a href="#discord">Discord</a></div><a class="topbtn" href="#server">PLAY NOW</a></div></nav>
+<main>
+<section class="hero" id="server"><div class="wrap heroGrid"><div>
+<span class="eyebrow">Minecraft Survival • PvP • Events</span>
+<h1><span class="o">SURVIVE.</span><br><span class="p">FIGHT.</span><br>CAUSE CHAOS.</h1>
+<p class="lead">A fast-moving Minecraft SMP with PvP, progression, custom crates, a virtual Chaos Shards economy and a community built around events.</p>
+<div class="actions"><a class="btn primary" href="https://discord.com/invite/rCVdCtJ72" target="_blank" rel="noopener">Join Discord ↗</a><button class="btn" onclick="copyIP()">Copy Java IP</button></div>
+</div><div class="server"><div class="serverTop"><h3>ChaosSMP Network</h3><span class="online">● ONLINE</span></div>
+<div class="ip" onclick="copyIP()"><small>Java Edition</small><strong>chaossmp.onplugged.host</strong></div>
+<div class="stats"><div class="stat"><span>Bedrock</span><b>chaossmp.onplugged.host:39770</b></div><div class="stat"><span>Economy</span><b>Money + Chaos Shards</b></div><div class="stat"><span>Crates</span><b>Common → Mithic</b></div><div class="stat"><span>Community</span><b>Discord</b></div></div>
+</div></div></section>
+<section id="features"><div class="wrap"><div class="head"><div><div class="kicker">ChaosSMP</div><h2>Made for players who want chaos.</h2></div><p>Clean progression, useful rewards and a server identity that actually feels custom.</p></div><div class="grid">
+<div class="card"><div class="icon">⚔</div><h3>PvP</h3><p>Fight, defend your base and take risks. PvP is part of the experience.</p></div>
+<div class="card"><div class="icon">✦</div><h3>Chaos Shards</h3><p>A separate virtual currency used for crate keys without filling inventories with shard items.</p></div>
+<div class="card"><div class="icon">♜</div><h3>Custom Crates</h3><p>Seven crate tiers with escalating rewards and a dedicated key shop.</p></div>
+<div class="card"><div class="icon">◆</div><h3>Chaos Shop</h3><p>Blocks, Decoration, Enchanting, Food, Music, Redstone, Workstations, PvP and Chaos Keys.</p></div>
+<div class="card"><div class="icon">☄</div><h3>Events</h3><p>Community events, giveaways and announcements through Discord.</p></div>
+<div class="card"><div class="icon">⌁</div><h3>Progression</h3><p>Build, trade, earn, unlock stronger rewards and make your mark on the world.</p></div>
+</div></div></section>
+<section id="economy"><div class="wrap"><div class="head"><div><div class="kicker">Economy</div><h2>Chaos Shards are your premium grind.</h2></div><p>Money handles the main economy. Chaos Shards are virtual and focused on crate-key progression.</p></div><div class="economy"><div class="card shard"><div class="kicker">Virtual Currency</div><div class="big">✦</div><h3>Chaos Shards</h3><p>Earn them through server activities and spend them on powerful crate keys. No physical item required.</p></div><div class="card"><div class="tiers">
+<div class="tier"><span>Common</span><strong>1,000 ✦</strong></div><div class="tier"><span>Rare</span><strong>10,000 ✦</strong></div><div class="tier"><span>Epic</span><strong>100,000 ✦</strong></div><div class="tier"><span>Legendary</span><strong>5,000,000 ✦</strong></div><div class="tier"><span>VIP</span><strong>1,000,000 ✦</strong></div><div class="tier"><span>Mithic</span><strong>150,000,000 ✦</strong></div>
+</div></div></div></div></section>
+<section id="rules"><div class="wrap"><div class="head"><div><div class="kicker">Rules</div><h2>Keep the chaos fair.</h2></div><p>Core community rules. Staff may publish additional rules on the server or Discord.</p></div><div class="card rules"><div>
+<div class="rule"><span class="num">1</span><p>No cheats, hacks or illegal clients.</p></div><div class="rule"><span class="num">2</span><p>No X-Ray or intentional exploits.</p></div><div class="rule"><span class="num">3</span><p>Respect players and staff.</p></div><div class="rule"><span class="num">4</span><p>No spam, flooding or excessive advertising.</p></div></div><div>
+<div class="rule"><span class="num">5</span><p>No discrimination, hate speech or severe harassment.</p></div><div class="rule"><span class="num">6</span><p>Do not intentionally crash, lag or damage the server.</p></div><div class="rule"><span class="num">7</span><p>Respect staff decisions.</p></div><div class="rule"><span class="num">8</span><p>PvP, raiding and griefing follow the server gameplay rules.</p></div></div></div></div></section>
+<section id="discord"><div class="wrap"><div class="disc"><div><div class="kicker">Community</div><h2>Join the Chaos.</h2><p>Announcements, support, recruiting, events and giveaways.</p></div><a class="btn primary" href="https://discord.com/invite/rCVdCtJ72" target="_blank" rel="noopener">Open Discord ↗</a></div></div></section>
+</main>
+<footer><div class="wrap frow"><div><span class="px">CHAOS SMP</span> — Survive. Fight. Cause Chaos.</div><div>Java: <strong>chaossmp.onplugged.host</strong></div></div></footer>
+<div class="toast" id="toast">IP copied!</div>
+<script>function copyIP(){const t=document.getElementById('toast');const done=()=>{t.classList.add('show');clearTimeout(window.__t);window.__t=setTimeout(()=>t.classList.remove('show'),1500)};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText('chaossmp.onplugged.host').then(done).catch(done);else done()}</script>
+</body></html>
